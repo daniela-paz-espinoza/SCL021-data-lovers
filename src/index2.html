@@ -1,28 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Data Lovers</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    <button id="btnPais">Pais</button>
-    <ul id="root">       
-        
-    </ul>
 
-    
+    <div>
+      <img class="logo" src="rio.png" alt="">
+    </div>
 
-    <template id="liTemplate">
-        <div class="list">
-            <b>Pais:</b>
-            <span id="text-primary">Aqui va el pais</span>
-        </div>
-        
-    </template>
+    <select id="pais" name="country">
+        <option>Pais</option>
+    </select>
 
-    
+    <select id="deporte" name="sport">
+        <option>Deporte</option>
+    </select>
+
+    <select id="medalla" name="medal">
+      <option>Medalla</option>
+    </select>
+
+    <section class="container flex text-center">
+        <table>
+            <thead>
+             <tr>
+               <th class="pais">País</th>
+               <th class="nombre">Nombre <button id="btnOrdenar">?</button></th>
+               <th class="deporte">Deporte</th>
+               <th class="medalla">Medalla</th>
+             </tr>
+            </thead>
+            <tbody id="medalsTable">
+
+            </tbody>
+           </table>
+
+
+    </section>
+
+    <ul id="root"></ul>
+
+
+
+
+
+
+
     <script src="main.js" type="module"></script>
 </body>
+
 </html>

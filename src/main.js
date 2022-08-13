@@ -1,69 +1,145 @@
 //import { example } from './data.js';
-// import data from './data/lol/lol.js';
-  import data from './data/athletes/athletes.js';
-  const divRoot = document.getElementById("root");//div de html donde guardare objetos de js
-  const fragment = document.createDocumentFragment()
-  const liTemplate = document.getElementById("liTemplate")//capturamos template de html
+import data from './data/athletes/athletes.js';
+import { filterData } from './data.js';
 
-  const teamAthletes = data.athletes;
-//   const result = data.athletes.reduce(function (allTeam, athletes) {//aqui se crea la const para aplicar el reduce y queremos traer el pais 
-//     return Array.from(new Set([...allTeam, ...athletes.team]))//deberia retornar solo los paises sin repetirse 
-//   }, [])
+const teamAthletes = data.athletes;//trae la base de datos de atlethes
 
-function botonPais(){
-    paises
+function sortData(data, columna="team"){
+    data.sort((a, b) => {
+        return a[columna] < b[columna] ? -1 : 1;
+    })
 }
+sortData(teamAthletes, );
 
-document.getElementById("btnPais").onclick = function(){
-    botonPais();
-}
+function showAthletes(lista){
+    let medalsTable=document.getElementById("medalsTable");
+    let htmlmedals="";
+    lista.forEach(function(pais){
+      htmlmedals = htmlmedals + `
+      <tr>
+      <td class="pais">${pais.team}</td>
+      <td class="nombre">${pais.name}</td>
+      <td class="deporte">${pais.sport}</td>
+      <td class="medalla">${pais.medal}</td>
+      </tr>
+      `
+
+    })
+    medalsTable.innerHTML=htmlmedals
+  }
+  showAthletes(teamAthletes);
 
 
-  const prueba = teamAthletes.map(function(item){
+let country = "";
+let sport = "";
+let medal = "";
+
+function handleChange(event) {
+    //console.log(event.target.value)
+    if (event.target.name === "country") {
+        country = event.target.value
+    }
+    if (event.target.name === "sport") {
+        sport = event.target.value
+    }
+    if (event.target.name === "medal") {
+        medal = event.target.value
+    }
+
+    let filterTeam = filterData(teamAthletes, country, sport, medal);
+    if (country === "Pais"){
+
+        showAthletes(teamAthletes)
+    }else{
+        if (sport === "Deporte"){
+
+            showAthletes(filterTeam);
+         } //else{
+
+        //     showAthletes(filterTeam);
+        // }
+    }
+        if (medal === "Medalla"){
+
+            showAthletes(filterTeam);
+        } else{
+
+            showAthletes(filterTeam);
+        }
+        if ( country === "Pais" && sport === "Deporte" && medal === "Medalla"){
+           showAthletes(teamAthletes);
+        }
+    }
+
+
+
+//funcion que filtra al momento de seleccionar el pais en el listado
+const select = document.getElementById('pais');
+select.addEventListener('change', handleChange);
+const selectSport = document.getElementById('deporte');
+selectSport.addEventListener('change', handleChange);
+const selectMedal = document.getElementById('medalla');
+selectMedal.addEventListener('change', handleChange);
+
+//funcion que hace un array con todos los paises de la DB sin repetirlos
+const prueba = teamAthletes.map(function (item) {
     return item.team
-  })
-  const paises = new Set ([...prueba])
+})
+const paises = Array.from(new Set([...prueba]))
+//console.log(paises)
+
+//funcion para cargar los paises en el boton select
+function cargarPaises() {
+    const arrayPaises = paises;
+    arrayPaises.sort();// Ordena el boton select alfabeticamente
+    for (const i in arrayPaises) {
+        document.getElementById("pais").innerHTML += "<option value='" + arrayPaises[i] + "'>" + arrayPaises[i] + "</option>";
+    }
+}
+cargarPaises();
+
+//funcion que hace un array con todos los deportes de la DB sin repetirlos
+const pruebaSPort = teamAthletes.map(function (item) {
+    return item.sport
+})
+const deporte = Array.from(new Set([...pruebaSPort]))
+//console.log(paises)
+
+//funcion para cargar los deportes en el boton select
+function cargarDeporte() {
+    const arrayDeportes = deporte;
+    arrayDeportes.sort();// Ordena el boton select alfabeticamente
+    for (const i in arrayDeportes) {
+        document.getElementById("deporte").innerHTML += "<option value='" + arrayDeportes[i] + "'>" + arrayDeportes[i] + "</option>";
+    }
+}
+cargarDeporte();
+
+//funcion que hace un array con todos los paises de la DB sin repetirlos
+const pruebaMedal = teamAthletes.map(function (item) {
+    return item.medal
+})
+const medallas = Array.from(new Set([...pruebaMedal]))
+//console.log(paises)
+
+//funcion para cargar los paises en el boton select
+function cargarMedallas() {
+    const arrayMedallas = medallas;
+    arrayMedallas.sort();// Ordena el boton select alfabeticamente
+    for (const i in arrayMedallas) {
+        document.getElementById("medalla").innerHTML += "<option value='" + arrayMedallas[i] + "'>" + arrayMedallas[i] + "</option>";
+    }
+}
+cargarMedallas();
 
 
-  console.log(paises)
-    //console.log(newTeamAthletes) 
-
-  teamAthletes.forEach(paises => {
-     const clone = liTemplate.content.cloneNode(true)
-     clone.getElementById("text-primary").textContent = paises.team
-
-     fragment.appendChild(clone)
- })
-
- divRoot.appendChild(fragment)
- 
-    
-    
-    
- 
- //console.log(data.athletes["age"]);
-
-//  const nuevoParrafo = document.createElement("p");
-//  nuevoParrafo.className.add(pais);
-
- 
-//  const atleta = data.athletes[i].name;
-//  const deporte = data.athletes[i].sport;
-//  const medalla = data.athletes[i].medal;
 
 
 
-//  pais.array.forEach(paises => {
-//     const parrafo = document.createElement('p');
-//     parrafo.className=pais;
-    
-//  });
 
 
-//   for(let i = 0; i <= data.athletes.length; i++){
-//       console.log(data.athletes[i].team);
-//      console.log(data.athletes[i].name);
-//      console.log(data.athletes[i].sport);
-//      console.log(data.athletes[i].medal);
-    
-  //}
+
+
+
+
+
