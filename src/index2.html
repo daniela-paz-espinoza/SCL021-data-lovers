@@ -12,47 +12,45 @@
 <body>
 
     <div>
-      <img class="logo" src="rio.png" alt="">
+        <img class="logo" src="rio.png" alt="">
     </div>
+    <nav class="select">
+        <select id="pais" name="country">
+            <option>País</option>
+        </select>
 
-    <select id="pais" name="country">
-        <option>Pais</option>
-    </select>
+        <select id="deporte" name="sport">
+            <option>Deporte</option>
+        </select>
 
-    <select id="deporte" name="sport">
-        <option>Deporte</option>
-    </select>
+        <select id="medalla" name="medal">
+            <option>Medalla</option>
+        </select>
 
-    <select id="medalla" name="medal">
-      <option>Medalla</option>
-    </select>
 
-    <section class="container flex text-center">
+        <select id="order" class="select">
+            <option value="totalOrder">Ordenar</option>
+            <option value="order-up">Orden Ascendente</option>
+            <option value="order-down">Orden Descendente</option>
+        </select>
+    </nav>
+    <section class="container">
         <table>
             <thead>
-             <tr>
-               <th class="pais">País</th>
-               <th class="nombre">Nombre <button id="btnOrdenar">?</button></th>
-               <th class="deporte">Deporte</th>
-               <th class="medalla">Medalla</th>
-             </tr>
+                <tr>
+
+                    <th>País</th>
+                    <th>Nombre</th>
+                    <th>Deporte</th>
+                    <th>Medalla</th>
+                </tr>
             </thead>
             <tbody id="medalsTable">
-
             </tbody>
-           </table>
-
-
+        </table>
     </section>
 
     <ul id="root"></ul>
-
-
-
-
-
-
-
     <script src="main.js" type="module"></script>
 </body>
 
